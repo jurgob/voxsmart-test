@@ -61,11 +61,15 @@ npm start
 ## assumption/decision
 
 ### assumpion
-- the app will run in a single process (no clustering enabled, https://medium.com/@CodeAndBiscuits/understanding-nodejs-clustering-in-docker-land-64ce2306afef#.9x6j3b8vw  )
-- I assume that ""
+1. regarding the api csrng.net throttle, id done the foolowing assumption: 
+- I've assumed that I can't use redis (I think that's what "no need of persinstence means)"
+- the app will run in a single process (no clustering enabled, it could make sense if nodejs is dockerized)
+- I assume that one single instance is gonna run of this server , of if multiple once are gonna run, there will be no shared proxy (like squid)
+
 
 ### code style
 - I've used module pattern design for creating object e.g. 
+
 ```js
 function createModule(){
     const method1 = () => {}
@@ -88,6 +92,11 @@ function createModule(client=axios){
     }
 }
 ```
+
+### testing strategy
+- explicit mock with manual DI rather then magic
+- there's an exeption for this on the server.test.ts in order to make it as much as near to an e2e possible
+- I use app.express(0) to spin up a dedicated http port per test. read more on https://casual-programming.com/exploring_utopian_testing_strategies_for_nodejs_rest_apis/
 
 
 
