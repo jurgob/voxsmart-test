@@ -2,15 +2,6 @@ import {  createRandomService} from './randomService';
 import assert from 'assert';
 import {  describe } from 'node:test';
 
-// import {mock as csjMock} from 'cjs-mock';
-// function mockRandomService( mockFn: typeof gerCsrngRandomNumber  ): {createRandomService: typeof createRandomService} {
-//     const res =  csjMock('./randomService', { //relative to example.js
-//         './gerCsrngRandomNumber': {
-//             gerCsrngRandomNumber: mockFn,
-//         } 
-//     });
-//     return res;
-// }
 
 const buildMockRandomServiceFn = (res: Promise<number>[]) =>  function mockRandomServiceFn(){
     const result = res.shift();

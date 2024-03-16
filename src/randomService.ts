@@ -13,7 +13,10 @@ export function createRandomService(gerCsrngRandomNumber=defaultGerCsrngRandomNu
   }
 
   function startFetching() {
-    setInterval(fetchRandomNumber, 1000);
+    const intervalId = setInterval(fetchRandomNumber, 1000);
+    return function stopFetching() {
+      clearInterval(intervalId);
+    }
   }
 
   function getAverage() {

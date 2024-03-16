@@ -3,8 +3,8 @@ import { createRandomService } from './randomService';
 
 export function createServer(){
     const randomService = createRandomService();
-    randomService.startFetching();
-    randomService.startFetching();
+    const stopFetching = randomService.startFetching();
+    // randomService.startFetching();
     const app = express();
 
     app.get('/random', (req, res) => {
@@ -12,6 +12,13 @@ export function createServer(){
         res.json({average});
     });
 
-    return app;
+    function stopApp(){
+        stopFetching();
+        app.emit('close');
+
+
+    }
+
+    return {app,stopApp };
 }
 

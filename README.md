@@ -58,4 +58,13 @@ npm start
 ```
 
 
+## assumption/decision
+
+### assumpion
+- the app will run in a single process (no clustering enabled, https://medium.com/@CodeAndBiscuits/understanding-nodejs-clustering-in-docker-land-64ce2306afef#.9x6j3b8vw  )
+
+
+### 
+
+
 
