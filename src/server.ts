@@ -15,8 +15,6 @@ export function createServer(){
     function stopApp(){
         stopFetching();
         app.emit('close');
-
-
     }
 
     return {app,stopApp };

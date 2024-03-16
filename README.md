@@ -62,9 +62,34 @@ npm start
 
 ### assumpion
 - the app will run in a single process (no clustering enabled, https://medium.com/@CodeAndBiscuits/understanding-nodejs-clustering-in-docker-land-64ce2306afef#.9x6j3b8vw  )
+- I assume that ""
+
+### code style
+- I've used module pattern design for creating object e.g. 
+```js
+function createModule(){
+    const method1 = () => {}
+    return {
+        method1
+    }
+}
+```
+
+- I've used params of "modules" to implement DI + default. e.g.: 
+```js
+import axios from 'axios';
+
+function createModule(client=axios){
+    const method1 = async () => {
+        client()
+    }
+    return {
+        method1
+    }
+}
+```
 
 
-### 
 
 
 
