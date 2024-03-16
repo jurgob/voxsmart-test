@@ -26,12 +26,12 @@ const buildMockRandomServiceFn = (res: Promise<number>[]) =>  function mockRando
 
 describe('getAverage works mocking fetchRandomNumber()', async () => {;
     describe('getAverage works with no  fetchRandomNumber', async () => {
-        const mockedFoo =mockRandomService(() => Promise.resolve(5)).createRandomService();
+        const mockedFoo =createRandomService(() => Promise.reject('shold not call this'));
         const actual = mockedFoo.getAverage();
         assert.strictEqual(actual, 0);
     });
     describe('getAverage works with one fetchRandomNumber', async () => {
-        const mockedFoo =mockRandomService(() => Promise.resolve(5)).createRandomService();
+        const mockedFoo =createRandomService(() => Promise.resolve(5));
         await mockedFoo.fetchRandomNumber();
         const actual = mockedFoo.getAverage();
         assert.strictEqual(actual, 5);
@@ -39,7 +39,8 @@ describe('getAverage works mocking fetchRandomNumber()', async () => {;
 
     describe('getAverage works with one 2 fetchRandomNumber ', async () => {
         const res = [Promise.resolve(2), Promise.resolve(10)]
-        const mockedFoo =mockRandomService(mock.fn(buildMockRandomServiceFn(res))).createRandomService();
+        const mockCsrngrandomNumber = buildMockRandomServiceFn(res);
+        const mockedFoo =createRandomService(mockCsrngrandomNumber);
         
         await mockedFoo.fetchRandomNumber();
         await mockedFoo.fetchRandomNumber();
@@ -49,7 +50,8 @@ describe('getAverage works mocking fetchRandomNumber()', async () => {;
 
     describe('getAverage works with one 2 fetchRandomNumber successful and one failure ', async () => {
         const res = [Promise.resolve(2), Promise.reject("random error"),Promise.resolve(10)]
-        const mockedFoo =mockRandomService(mock.fn(buildMockRandomServiceFn(res))).createRandomService();
+        const mockCsrngrandomNumber = buildMockRandomServiceFn(res);
+        const mockedFoo =createRandomService(mockCsrngrandomNumber);
         
         await mockedFoo.fetchRandomNumber();
         await mockedFoo.fetchRandomNumber();

@@ -1,7 +1,7 @@
 
-import { gerCsrngRandomNumber } from './gerCsrngRandomNumber';
-
-export function createRandomService() {
+import { gerCsrngRandomNumber as defaultGerCsrngRandomNumber } from './gerCsrngRandomNumber';
+// type GerCsrngRandomNumber = typeof gerCsrngRandomNumber|undefined;
+export function createRandomService(gerCsrngRandomNumber=defaultGerCsrngRandomNumber){
   let randomNumbers: number[] = [];
   let sum = 0;
   async function fetchRandomNumber() {

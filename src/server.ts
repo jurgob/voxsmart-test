@@ -1,17 +1,17 @@
 import express from 'express';
-// import { startFetching, getAverage } from './randomService';
+import { createRandomService } from './randomService';
 
-export const app = express();
+export function createServer(){
+    const randomService = createRandomService();
+    randomService.startFetching();
+    randomService.startFetching();
+    const app = express();
 
-app.get('/', (req, res) => {
-//   const average = getAverage();
-//   res.send(`Average: ${average}`);
-const average = 5;
-  res.send(`Average: ${average}`);
-});
+    app.get('/random', (req, res) => {
+        const average = randomService.getAverage();
+        res.json({average});
+    });
 
+    return app;
+}
 
-
-// app.listen(port, () => {
-//   console.log(`Server is listening at http://localhost:${port}`);
-// });
