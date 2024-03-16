@@ -5,13 +5,11 @@ export function createRandomService(gerCsrngRandomNumber=defaultGerCsrngRandomNu
   let randomNumbers: number[] = [];
   let sum = 0;
   async function fetchRandomNumber() {
-    try {
-      const randomNumber = await gerCsrngRandomNumber();
-      randomNumbers.push(randomNumber);
-      sum += randomNumber;
-    } catch (error) {
-      console.error('Error fetching random number:', error);
-    }
+      const randomNumber = await gerCsrngRandomNumber().catch(() => undefined);
+      if(typeof randomNumber === 'number'){
+        randomNumbers.push(randomNumber);
+        sum += randomNumber;
+      }
   }
 
   function startFetching() {
