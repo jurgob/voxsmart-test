@@ -2,12 +2,15 @@
   "name": "voxsmart-test",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
+    "start": "node dist/index.js",
     "dev": "tsx watch src/index.ts",
     "build": "tsc",
     "test": "node --import tsx --test src/*test.ts",
-    "test:file": "node --import tsx --test $1"
+    "test:w": "node --import tsx --test --watch src/*test.ts",
+    "test:file": "node --import tsx --test $1",
+    "test:file:w": "node --import tsx --watch --test $1"
   },
   "author": "",
   "license": "ISC",
