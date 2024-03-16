@@ -1,14 +1,16 @@
 import {createServer} from './server'; 
+const logger = require('pino')()
+
 // import { RandomService } from './randomService';
 const port = 3000;
 const {app,stopApp} = createServer();
 
 const server = app.listen(port, () => {
-  console.log(`Server is listening at http://localhost:${port}`);
+  logger.info(`Server is listening at http://localhost:${port}`);
 });
 
 process.on('SIGINT', function() {
-  console.log("Start server shutdown");
+  logger.info("Start server shutdown");
   stopApp();
   process.exit();
 });
