@@ -2,13 +2,12 @@
 
 # README
 
-check test coverate on codecov: https://app.codecov.io/gh/jurgob/voxsmart-test
+check test coverage on codecov: https://app.codecov.io/gh/jurgob/voxsmart-test
 
 
 ## Install
 
 ### install node.js
-
 install node v20.11.1 or if you are an nvm/fnm user run
 
 ```bash
@@ -121,6 +120,19 @@ you can clean logs with:
 npm run dev:logs:clean
 ```
 
+## code coverate
+
+after you have runned a set of tests (e.g. with `npm test`) run the command: 
+
+```npm run coverage
+```
+
+after this, if you run "
+
+```bash
+npm run coverage:http
+```
+on open your browser on `http://127.0.0.1:8080`, you will be able to check the test locally
 
 ## Assumption/decision
 
@@ -131,7 +143,7 @@ npm run dev:logs:clean
 - I assume that one single instance is gonna run of this server , of if multiple once are gonna run, there will be no shared proxy (like squid)
 - given the use case, I've implemented a rate limiter (so if multiple requests are done in the same 1s time windows, the first one is exectued the other ones got discharged). Queuee the requests (aka debouncing) does not make much sense in this case
 
-
+2. I spend some time to setup the node.js npm script with some usefull shortcut for the test runner 
 ### coding style
 - I've used module pattern design for creating object e.g. 
 
@@ -143,7 +155,6 @@ function createModule(){
     }
 }
 ```
-
 - I've used params of "modules" to implement DI + default. e.g.: 
 ```js
 import axios from 'axios';
