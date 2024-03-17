@@ -10,7 +10,10 @@ export function createRandomService(gerCsrngRandomNumber=defaultGerCsrngRandomNu
 
   async function fetchRandomNumber() {
     const currentTime = Date.now();
-    if (fetchRatelimit && (currentTime - lastExecutionTime < timeWindow))
+    const diff = currentTime - lastExecutionTime;
+    const skipFetch = (diff < timeWindow)
+
+    if (fetchRatelimit && skipFetch)
       return;
     
     lastExecutionTime = currentTime;

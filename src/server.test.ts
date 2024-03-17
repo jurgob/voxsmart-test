@@ -10,7 +10,6 @@ import { gerCsrngRandomNumber} from './gerCsrngRandomNumber';
 const buildMockRandomServiceFn = (res: Promise<number>[]) =>  function mockRandomServiceFn(){
     
     const result = res.shift();
-    console.log('result', result);
     if(result){
         return result;
     }else {
@@ -40,19 +39,17 @@ async function createServerMock(gerCsrngRandomNumber: Mock){
 describe('endpoint /random', async () => {
     
     beforeEach(() => {  
-        mock.timers.enable({ apis: ['setInterval'] });
+        mock.timers.enable({ apis: ['setInterval', 'Date'] });
     })
 
     afterEach(() => {
         mock.timers.reset();
-        // mock.reset();
     })
 
     it('return average of 0 at time 0', async () => {
         const randomResults = [Promise.resolve(50)]
 
         const {apiUrl, close} = await createServerMock(buildMockRandomServiceFn(randomResults));
-        // mock.timers.tick(1001);
         const response = await axios.get(`${apiUrl}/random`);
         
         assert.strictEqual(response.data.average, 0);
@@ -81,32 +78,26 @@ describe('endpoint /random', async () => {
         close();
     });
 
-    // it('return average of 75 after 2 tick with results [50, 100]', async (context) => {
-    //     context.mock.timers.enable({ apis: ['setInterval'] });
-    //     const randomResults = [Promise.resolve(50), Promise.resolve(100)]
+    it('return average of 75 after 2 tick with results [50, 100]', async () => {
+        const randomResults = [Promise.resolve(50), Promise.resolve(100)]
+        const {apiUrl, close} = await createServerMock(buildMockRandomServiceFn(randomResults));
+        mock.timers.tick(1000);
+        mock.timers.tick(1000);
+        const response = await axios.get(`${apiUrl}/random`);     
+        assert.strictEqual(response.data.average, 75);
+        close();
+    });
 
-    //     const {apiUrl, close} = await createServerMock(buildMockRandomServiceFn(randomResults));
-    //     mock.timers.tick(1001);
-    //     mock.timers.tick(1002);
-    //     // mock.timers.reset();
-    //     // mock.timers.enable({ apis: ['setInterval'] });
-    //     // mock.timers.tick(1001);
-    //     // mock.timers.tick(1002);
-    //     const response = await axios.get(`${apiUrl}/random`);
-        
-    //     assert.strictEqual(response.data.average, 75);
-    //     close();
-    // });
+    it('return average of 50 after 1.5 tick with results [50, 100]', async () => {
+        const randomResults = [Promise.resolve(50), Promise.resolve(100)]
+        const {apiUrl, close} = await createServerMock(buildMockRandomServiceFn(randomResults));
+        mock.timers.tick(1000);
+        mock.timers.tick(500);
+        const response = await axios.get(`${apiUrl}/random`);     
+        assert.strictEqual(response.data.average, 50);
+        close();
+    });
 
-
-    // it('return average of 0 at 0.5 seconds', async () => {
-    //     const {apiUrl, close} = await createServerMock();
-    //     const response = await axios.get(`${apiUrl}/random`);
-        
-    //     assert.strictEqual(response.data.average, 0);
-    //     close();
-    // });
-    // createServer
 
     
 });    
