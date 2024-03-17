@@ -10,7 +10,7 @@
     "dev:logs:clean": "echo '' > /tmp/voxtest.log",
     "build": "tsc",
     "_test": "LOG_ON_FILE=true node --no-warnings --import tsx --test $@",
-    "test": "npm run _test -- src/*test.ts",
+    "test": "nyc npm run _test -- src/*test.ts",
     "test:w": "npm run _test -- --watch src/*test.ts",
     "test:file": "npm run _test -- $1",
     "test:file:w": "npm run _test -- --watch $1"
@@ -21,6 +21,7 @@
     "@types/express": "^4.17.21",
     "@types/node": "^20.11.28",
     "cjs-mock": "^1.0.0",
+    "nyc": "^15.1.0",
     "pino-pretty": "^10.3.1",
     "tsx": "^4.7.1",
     "typescript": "^5.4.2"
