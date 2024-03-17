@@ -1,5 +1,5 @@
 import {createServer} from './server'; 
-const logger = require('pino')()
+import {logger} from './logger';
 
 // import { RandomService } from './randomService';
 const port = 3000;

@@ -1,6 +1,5 @@
 import axios from 'axios';
-
-const logger = require('pino')()
+import {logger} from './logger';
 
 
 export type Client = {
