@@ -2,8 +2,10 @@
 import { gerCsrngRandomNumber as defaultGerCsrngRandomNumber } from './gerCsrngRandomNumber';
 // import {setInterval, clearInterval} from 'node:timers';
 export function createRandomService(gerCsrngRandomNumber=defaultGerCsrngRandomNumber, fetchRatelimit:boolean = false){
-  let randomNumbers: number[] = [];
+  // let randomNumbers: number[] = [];
   let sum = 0;
+  let totalNumbers = 0;
+
 
   let lastExecutionTime = 0;
   let timeWindow = 1000;
@@ -20,7 +22,7 @@ export function createRandomService(gerCsrngRandomNumber=defaultGerCsrngRandomNu
 
     const randomNumber = await gerCsrngRandomNumber().catch(() => undefined);
     if(typeof randomNumber === 'number'){
-      randomNumbers.push(randomNumber);
+      totalNumbers+=1;
       sum += randomNumber;
     }
 
@@ -34,7 +36,7 @@ export function createRandomService(gerCsrngRandomNumber=defaultGerCsrngRandomNu
   }
 
   function getAverage() {
-    return randomNumbers.length === 0 ? 0 : sum / randomNumbers.length;
+    return sum === 0 && totalNumbers === 0?  0 : sum / totalNumbers;
   }
 
   return { fetchRandomNumber, startFetching, getAverage };
