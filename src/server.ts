@@ -1,9 +1,9 @@
 import express from 'express';
 import { createRandomService } from './randomService';
-import { gerCsrngRandomNumber } from './gerCsrngRandomNumber';
+import { gerCsrngRandomNumber , Client,defaultClient} from './gerCsrngRandomNumber';
 
-export function createServer(){
-    const randomService = createRandomService(gerCsrngRandomNumber, true);
+export function createServer(client:Client= defaultClient){
+    const randomService = createRandomService(() => gerCsrngRandomNumber(), true);
     const stopFetching = randomService.startFetching();
     const app = express();
 

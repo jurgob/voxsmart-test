@@ -7,7 +7,9 @@ export type Client = {
   get: (url: string) => Promise<unknown>;
 };
 
-export async function gerCsrngRandomNumber(client:Client= axios): Promise<number|undefined> {
+export const defaultClient: Client = axios;
+
+export async function gerCsrngRandomNumber(client:Client= defaultClient): Promise<number|undefined> {
     const MIN = 0;
     const MAX = 100;
     try {
