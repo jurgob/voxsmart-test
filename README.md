@@ -24,6 +24,36 @@ npm test
  npm run test:file src/randomService.test.ts
  ```
 
+or interractive way: 
+
+```bash 
+ npm run test:file:w src/randomService.test.ts
+ ```
+
+## run single file with only
+
+if you want to use `describe.only()` and `test.only()` remember you got to add only to all the describe/test of your current test like: 
+```js
+// notice I've added only to both the test and the parent describe
+describe.only('group of test', ()=> {
+    test.only('my test', ()=> {
+        assert.strictEqual(true, true);
+    })
+})
+```
+the run 
+
+
+```bash 
+ npm run test:file:only src/randomService.test.ts
+ ```
+
+or interractive way: 
+
+```bash 
+ npm run test:file:only:w src/randomService.test.ts
+ ```
+
 
 ## run all test / single test in watch mode
 
@@ -56,6 +86,7 @@ then run:
 ```bash
 npm start
 ```
+
 
 
 ## assumption/decision
