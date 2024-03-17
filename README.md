@@ -2,6 +2,9 @@
 
 # README
 
+check test coverate on codecov: https://app.codecov.io/gh/jurgob/voxsmart-test
+
+
 ## Install
 
 ### install node.js
