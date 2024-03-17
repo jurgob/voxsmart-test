@@ -1,6 +1,6 @@
 
 import { gerCsrngRandomNumber as defaultGerCsrngRandomNumber } from './gerCsrngRandomNumber';
-
+// import {setInterval, clearInterval} from 'node:timers';
 export function createRandomService(gerCsrngRandomNumber=defaultGerCsrngRandomNumber, fetchRatelimit:boolean = false){
   let randomNumbers: number[] = [];
   let sum = 0;
