@@ -9,10 +9,11 @@
     "dev:logs": "tail -f /tmp/voxtest.log | pino-pretty",
     "dev:logs:clean": "echo '' > /tmp/voxtest.log",
     "build": "tsc",
-    "test": "node --import tsx --test src/*test.ts",
-    "test:w": "node --import tsx --test --watch src/*test.ts",
-    "test:file": "node --import tsx --test $1",
-    "test:file:w": "node --import tsx --watch --test $1"
+    "_test": "LOG_ON_FILE=true node --no-warnings --import tsx --test $@",
+    "test": "npm run _test -- src/*test.ts",
+    "test:w": "npm run _test -- --watch src/*test.ts",
+    "test:file": "npm run _test -- $1",
+    "test:file:w": "npm run _test -- --watch $1"
   },
   "author": "",
   "license": "ISC",
