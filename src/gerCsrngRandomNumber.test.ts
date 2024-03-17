@@ -67,7 +67,7 @@ describe('gerCsrngRandomNumber return undefined on axios error/unexpected result
 
     test('when axios returning a number not in the expected range', async () => {
         const mockClient:Client = {
-            get: async (url: string) => Promise.resolve({data:{random: 100000} })
+            get: async (url: string) => Promise.resolve({data:[{random: 100000}] })
         }
         const number = await gerCsrngRandomNumber(mockClient)
         assert.strictEqual(number, undefined);
