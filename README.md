@@ -1,3 +1,5 @@
+[![codecov](https://codecov.io/gh/jurgob/voxsmart-test/graph/badge.svg?token=K5L1O7VQ0F)](https://codecov.io/gh/jurgob/voxsmart-test)
+
 # README
 
 ## Install
@@ -30,7 +32,7 @@ or interractive way:
  npm run test:file:w src/randomService.test.ts
  ```
 
-## run single file with only
+### Run single file with only
 
 if you want to use `describe.only()` and `test.only()` remember you got to add only to all the describe/test of your current test like: 
 ```js
@@ -54,7 +56,7 @@ or interractive way:
  ```
 
 
-## run all test / single test in watch mode
+### Run all test / single test in watch mode
 
 ```bash
 # run all test in watch mode

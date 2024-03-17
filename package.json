@@ -15,7 +15,9 @@
     "test:file": "npm run _test -- $1",
     "test:file:only": "npm run _test -- --test-only $1",
     "test:file:w": "npm run _test -- --watch $@",
-    "test:file:only:w": "npm run _test -- --watch --test-only $@"
+    "test:file:only:w": "npm run _test -- --watch --test-only $@",
+    "coverage": "nyc report --reporter=lcov",
+    "coverage:http": "npx http-server coverage/lcov-report"
   },
   "author": "",
   "license": "ISC",
