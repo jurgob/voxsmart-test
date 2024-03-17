@@ -1,6 +1,6 @@
 # README
 
-## install
+## Install
 
 ### set rigth node version. install node v20.11.1 or if you are an nvm/fnm user
 
@@ -9,16 +9,16 @@ cs voxsmart-test
 nvm use 
 ```
 
-## test
+## Test
 
-### run test
+### Run test
 
 ```bash
 npm test
 ```
 
 
-### run single file
+### Run single file
 
 ```bash 
  npm run test:file src/randomService.test.ts
@@ -41,8 +41,7 @@ describe.only('group of test', ()=> {
     })
 })
 ```
-the run 
-
+then run: 
 
 ```bash 
  npm run test:file:only src/randomService.test.ts
@@ -87,18 +86,32 @@ then run:
 npm start
 ```
 
+## Logs
+
+when the test are running the logs are written in a file. You may want to visualize them in a different terminal with: 
+
+```sh
+npm run dev:logs
+```
+
+you can clean logs with: 
+
+```sh
+npm run dev:logs:clean
+```
 
 
-## assumption/decision
+## Assumption/decision
 
 ### assumpion
 1. regarding the api csrng.net throttle, id done the foolowing assumption: 
 - I've assumed that I can't use redis (I think that's what "no need of persinstence means)"
 - the app will run in a single process (no clustering enabled, it could make sense if nodejs is dockerized)
 - I assume that one single instance is gonna run of this server , of if multiple once are gonna run, there will be no shared proxy (like squid)
+- given the use case, I've implemented a rate limiter (so if multiple requests are done in the same 1s time windows, the first one is exectued the other ones got discharged). Queuee the requests (aka debouncing) does not make much sense in this case
 
 
-### code style
+### coding style
 - I've used module pattern design for creating object e.g. 
 
 ```js
@@ -127,7 +140,9 @@ function createModule(client=axios){
 ### testing strategy
 - explicit mock with manual DI rather then magic
 - there's an exeption for this on the server.test.ts in order to make it as much as near to an e2e possible
-- I use app.express(0) to spin up a dedicated http port per test. read more on https://casual-programming.com/exploring_utopian_testing_strategies_for_nodejs_rest_apis/
+- I've used app.express(0) to spin up a dedicated http port per test. read more on https://casual-programming.com/exploring_utopian_testing_strategies_for_nodejs_rest_apis/
+
+
 
 
 
