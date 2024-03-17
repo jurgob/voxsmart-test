@@ -1,19 +1,30 @@
 
 import { gerCsrngRandomNumber as defaultGerCsrngRandomNumber } from './gerCsrngRandomNumber';
-// type GerCsrngRandomNumber = typeof gerCsrngRandomNumber|undefined;
-export function createRandomService(gerCsrngRandomNumber=defaultGerCsrngRandomNumber){
+
+export function createRandomService(gerCsrngRandomNumber=defaultGerCsrngRandomNumber, fetchRatelimit:boolean = false){
   let randomNumbers: number[] = [];
   let sum = 0;
+
+  let lastExecutionTime = 0;
+  let timeWindow = 1000;
+
   async function fetchRandomNumber() {
-      const randomNumber = await gerCsrngRandomNumber().catch(() => undefined);
-      if(typeof randomNumber === 'number'){
-        randomNumbers.push(randomNumber);
-        sum += randomNumber;
-      }
+    const currentTime = Date.now();
+    if (fetchRatelimit && (currentTime - lastExecutionTime < timeWindow))
+      return;
+    
+    lastExecutionTime = currentTime;
+
+    const randomNumber = await gerCsrngRandomNumber().catch(() => undefined);
+    if(typeof randomNumber === 'number'){
+      randomNumbers.push(randomNumber);
+      sum += randomNumber;
+    }
+
   }
 
   function startFetching() {
-    const intervalId = setInterval(fetchRandomNumber, 1000);
+    const intervalId = setInterval(() => fetchRandomNumber(), 1000);
     return function stopFetching() {
       clearInterval(intervalId);
     }

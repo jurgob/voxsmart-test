@@ -1,10 +1,10 @@
 import express from 'express';
 import { createRandomService } from './randomService';
+import { gerCsrngRandomNumber } from './gerCsrngRandomNumber';
 
 export function createServer(){
-    const randomService = createRandomService();
+    const randomService = createRandomService(gerCsrngRandomNumber, true);
     const stopFetching = randomService.startFetching();
-    // randomService.startFetching();
     const app = express();
 
     app.get('/random', (req, res) => {

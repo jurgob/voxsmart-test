@@ -19,6 +19,7 @@ export async function gerCsrngRandomNumber(client:Client= axios): Promise<number
           logger.error({result}, 'gerCsrngRandomNumber error unexpected number');
           return undefined;
         }
+        logger.info({result}, 'gerCsrngRandomNumber result');
         return result;
       }else{
         logger.error({data, data_type: typeof data}, 'gerCsrngRandomNumber error wrong data format');
