@@ -90,6 +90,7 @@ then run:
 ```bash
 npm start
 ```
+
 ## Run integration tests
 
 in a terminal, run the service with: 
