@@ -16,6 +16,7 @@
     "test:file:only": "npm run _test -- --test-only $1",
     "test:file:w": "npm run _test -- --watch $@",
     "test:file:only:w": "npm run _test -- --watch --test-only $@",
+    "test:integration": "npm run _test -- src/server.integration.ts",
     "coverage": "nyc report --reporter=lcov",
     "coverage:http": "npx http-server coverage/lcov-report"
   },

@@ -21,7 +21,6 @@ nvm use # or run "fnm use"
 npm test
 ```
 
-
 ### Run single file
 
 ```bash 
@@ -68,7 +67,7 @@ npm test:w
 npm run test:file:w src/randomService.test.ts
 ```
 
-## run
+## Run the service
 
 ### run in dev mode
 
@@ -89,6 +88,21 @@ then run:
 ```bash
 npm start
 ```
+## Run integration tests
+
+in a terminal, run the service with: 
+
+```bash
+npm run dev
+```
+
+in another therminal run the integration with: 
+
+```bash
+npm run test:integration
+```
+
+
 
 ## Logs
 
