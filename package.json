@@ -13,7 +13,9 @@
     "test": "nyc npm run _test -- src/*test.ts",
     "test:w": "npm run _test -- --watch src/*test.ts",
     "test:file": "npm run _test -- $1",
-    "test:file:w": "npm run _test -- --watch $1"
+    "test:file:only": "npm run _test -- --test-only $1",
+    "test:file:w": "npm run _test -- --watch $@",
+    "test:file:only:w": "npm run _test -- --watch --test-only $@"
   },
   "author": "",
   "license": "ISC",
