@@ -4,11 +4,13 @@
 
 ## Install
 
-### set rigth node version. install node v20.11.1 or if you are an nvm/fnm user
+### install node.js
+
+install node v20.11.1 or if you are an nvm/fnm user run
 
 ```bash
 cs voxsmart-test
-nvm use 
+nvm use # or run "fnm use"
 ```
 
 ## Test
